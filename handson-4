@@ -1,0 +1,75 @@
+def merge_two_sorted_arrays(arr1, arr2):
+    result = []
+    i, j = 0, 0
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            result.append(arr1[i])
+            i += 1
+        else:
+            result.append(arr2[j])
+            j += 1
+    while i < len(arr1):
+        result.append(arr1[i])
+        i += 1
+    while j < len(arr2):
+        result.append(arr2[j])
+        j += 1
+    return result
+
+def merge_k_sorted_arrays(arrays):
+    if not arrays:
+        return []
+    while len(arrays) > 1:
+        merged_arrays = []
+        for i in range(0, len(arrays), 2):
+            if i + 1 < len(arrays):
+                merged = merge_two_sorted_arrays(arrays[i], arrays[i + 1])
+            else:
+                merged = arrays[i]
+            merged_arrays.append(merged)
+        arrays = merged_arrays
+    return arrays[0]
+
+
+def problem_1_examples():
+    array1 = [1, 3, 5, 7]
+    array2 = [2, 4, 6, 8]
+    array3 = [0, 9, 10, 11]
+    arrays1 = [array1, array2, array3]
+    print("Example 1 Input:", arrays1)
+    print("Example 1 Output:", merge_k_sorted_arrays(arrays1))
+    
+    array4 = [1, 3, 7]
+    array5 = [2, 4, 8]
+    array6 = [9, 10, 11]
+    arrays2 = [array4, array5, array6]
+    print("Example 2 Input:", arrays2)
+    print("Example 2 Output:", merge_k_sorted_arrays(arrays2))
+
+def remove_duplicates(array):
+    if not array:
+        return []
+    i = 0
+    for j in range(1, len(array)):
+        if array[j] != array[i]:
+            i += 1
+            array[i] = array[j]
+    return array[:i + 1]
+
+def problem_2_examples():
+    array1 = [2, 2, 2, 2, 2]
+    print("Example 1 Input:", array1)
+    print("Example 1 Output:", remove_duplicates(array1))
+    
+    array2 = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+    print("Example 2 Input:", array2)
+    print("Example 2 Output:", remove_duplicates(array2))
+
+
+def fib(n):
+  if n==0:
+    return 0
+  if n==1:
+    return 1
+  return fib(n-1)+fib(n-2)
+fib(5)
